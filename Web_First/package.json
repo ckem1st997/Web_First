@@ -1,0 +1,16 @@
+{
+  "name": "web_first",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "sasstocss": "node-sass sass/main.scss wwwroot\\css\\site.css -w"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "browser-sync": "^2.26.7",
+    "gulp": "^4.0.2",
+    "node-sass": "^4.13.0"
+  }
+}

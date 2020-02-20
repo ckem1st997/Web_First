@@ -1,0 +1,317 @@
+﻿@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@using X.PagedList.Mvc.Bootstrap4;
+
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<link rel="stylesheet" href="~/css/site.css" />
+
+<div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-interval="1000">
+            <img src="https://theme.hstatic.net/1000253775/1000529442/14/slideshow_2.jpg?v=135" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item" data-interval="10000">
+            <img src="https://theme.hstatic.net/1000253775/1000529442/14/slideshow_3.jpg?v=135" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item" data-interval="10000">
+            <img src="https://theme.hstatic.net/1000253775/1000529442/14/slideshow_4.jpg?v=135" class="d-block w-100" alt="...">
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+<section class="section-support">
+    <div class="flex-container container-fluid">
+        <div class="row">
+            <div class="column-wrap active-ani t111 col-sm-3 col-xs-6">
+                <div class="support-inner">
+                    <div class="inner-icon">
+                        <img src="//theme.hstatic.net/1000253775/1000529442/14/support_1_ic.png?v=136" alt="Giao hàng miễn phí">
+                    </div>
+                    <div class="inner-content">
+                        <h3><span>Giao hàng miễn phí</span></h3>
+                        <p>Cho đơn hàng trên 500k</p>
+                    </div>
+                </div>
+            </div>
+            <div class="column-wrap active-ani t222 col-sm-3 col-xs-6">
+                <div class="support-inner">
+                    <div class="inner-icon">
+                        <img src="//theme.hstatic.net/1000253775/1000529442/14/support_2_ic.png?v=136" alt="Đổi trả">
+                    </div>
+                    <div class="inner-content">
+                        <h3><span>Đổi trả</span></h3>
+                        <p>Trong vòng 7 ngày</p>
+                    </div>
+                </div>
+            </div>
+            <div class="column-wrap active-ani t333 ggg col-sm-3 col-xs-6">
+                <div class="support-inner">
+                    <div class="inner-icon">
+                        <img src="//theme.hstatic.net/1000253775/1000529442/14/support_3_ic.png?v=136" alt="COD toàn quốc">
+                    </div>
+                    <div class="inner-content">
+                        <h3><span>COD toàn quốc</span></h3>
+                        <p>Thanh toán nhận hàng</p>
+                    </div>
+                </div>
+            </div>
+            <div class="column-wrap active-ani t444 ggg col-sm-3 col-xs-6">
+                <div class="support-inner">
+                    <div class="inner-icon">
+                        <img src="//theme.hstatic.net/1000253775/1000529442/14/support_4_ic.png?v=136" alt="Hotline">
+                    </div>
+                    <div class="inner-content">
+                        <h3><span>Hotline</span></h3>
+                        <p>028.7100.6789</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@*<div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>*@
+<div class="product-title">
+    <h2>
+        <a asp-controller="San_Pham" asp-action="san_pham_moi">New Arrivals</a>
+    </h2>
+
+</div>
+@*<div class="product-show">
+        <div class="container-fluid">
+            <div class="row">
+
+            </div>
+        </div>
+    </div>*@
+<div class="collection-page">
+    <div class="wrapper-collection-1">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="row fitter">
+                        <div class="clearfix content-product-list ">
+                            @{
+                                var id = new List<string>();
+                            }
+                            @foreach (var item in ViewBag.SP_New)
+                            {
+                                int ss_id(string a)
+                                {
+                                    int k = 0;
+                                    foreach (var it in id)
+                                    {
+                                        if (it == a)
+                                            k = 1;
+                                    }
+
+                                    return k;
+                                }
+                                if (ss_id(item.Id_SP) == 0)
+                                {
+                                    int h = 0;
+                                    id.Add(item.Id_SP);
+                                    <div class="col-md-3 col-sm-6 col-xs-6 pro-loop index-loop-mb animation-tran active">
+                                        <div class="product-block product-resize site-animation fixheight" data-anmation="1" style="height: 308px;">
+                                            <div class="product-img">
+                                                <a href="/products/quan-jogger-s-dry" title="@item.Name_SP" class="image-resize" style="height: 234px;">
+                                                    @foreach (var item1 in ViewBag.SP_New)
+                                                    {
+
+                                                        if (item.Image_SP.Length < 12)
+                                                        {
+                                                            <picture>
+                                                                <source media="(max-width: 767px)" src="~/Img/sold_out11.png">
+                                                                <source media="(min-width: 768px)" src="~/Img/sold_out11.png">
+                                                                <img class="img-loop" alt=" QUẦN JOGGER S.DRY " src="~/Img/sold_out11.png">
+                                                            </picture>
+                                                            break;
+                                                        }
+                                                        else
+                                                        {
+
+                                                            if (@item.Id_SP == @item1.Id_SP)
+                                                            {
+                                                                h++;
+                                                                <picture>
+                                                                    <source media="(max-width: 767px)" srcset="/@item1.Image_SP">
+                                                                    <source media="(min-width: 768px)" srcset="/@item1.Image_SP">
+                                                                    <img class="img-loop" alt=" QUẦN JOGGER S.DRY " srcset="@item1.Image_SP">
+                                                                </picture>
+                                                            }
+                                                            if (h == 2)
+                                                            {
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+                                                </a>
+                                            </div>
+                                            <div class="product-detail clearfix">
+                                                <div class="box-pro-detail">
+                                                    <h3 class="pro-name">
+                                                        <a href="/products/quan-jogger-s-dry" title="@item.Name_SP">
+                                                            @item.Name_SP
+                                                        </a>
+                                                    </h3>
+                                                    <div class="box-pro-prices">
+                                                        <p class="pro-price ">
+                                                            <span class="giaban">@item.Price_SP</span>
+                                                            <span class="pro-price-del"></span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="button-showmore">
+    <a asp-controller="San_Pham" asp-action="san_pham_moi" class="moreproduct button">Xem thêm</a>
+</div>
+<div class="product-title">
+    <h2>
+        <a asp-controller="San_Pham" asp-action="san_pham_sale">Sale off</a>
+    </h2>
+
+</div>
+@*<div class="product-show">
+        <div class="container-fluid">
+            <div class="row">
+
+            </div>
+        </div>
+    </div>*@
+<div class="collection-page">
+    <div class="wrapper-collection-1">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="row fitter">
+                        <div class="clearfix content-product-list ">
+                            @{
+                                //  var id = new List<string>();
+                            }
+                            @foreach (var item in ViewBag.SP_Sale)
+                            {
+                                int ss_id(string a)
+                                {
+                                    int k = 0;
+                                    foreach (var it in id)
+                                    {
+                                        if (it == a)
+                                            k = 1;
+                                    }
+
+                                    return k;
+                                }
+                                if (ss_id(item.Id_SP) == 0)
+                                {
+                                    int h = 0;
+                                    id.Add(item.Id_SP);
+                                    <div class="col-md-3 col-sm-6 col-xs-6 pro-loop index-loop-mb animation-tran active">
+                                        <div class="product-block product-resize site-animation fixheight" data-anmation="1" style="height: 308px;">
+                                            <div class="product-img">
+                                                <a href="/products/quan-jogger-s-dry" title="@item.Name_SP" class="image-resize" style="height: 234px;">
+                                                    @foreach (var item1 in ViewBag.SP_Sale)
+                                                    {
+
+                                                        if (item.Image_SP.Length < 12)
+                                                        {
+                                                            <picture>
+                                                                <source media="(max-width: 767px)" src="~/Img/sold_out11.png">
+                                                                <source media="(min-width: 768px)" src="~/Img/sold_out11.png">
+                                                                <img class="img-loop" alt=" QUẦN JOGGER S.DRY " src="~/Img/sold_out11.png">
+                                                            </picture>
+                                                            break;
+                                                        }
+                                                        else
+                                                        {
+
+                                                            if (@item.Id_SP == @item1.Id_SP)
+                                                            {
+                                                                h++;
+                                                                <picture>
+                                                                    <source media="(max-width: 767px)" srcset="/@item1.Image_SP">
+                                                                    <source media="(min-width: 768px)" srcset="/@item1.Image_SP">
+                                                                    <img class="img-loop" alt=" QUẦN JOGGER S.DRY " srcset="@item1.Image_SP">
+                                                                </picture>
+                                                            }
+                                                            if (h == 2)
+                                                            {
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+                                                </a>
+                                            </div>
+                                            <div class="product-detail clearfix">
+                                                <div class="box-pro-detail">
+                                                    <h3 class="pro-name">
+                                                        <a href="/products/quan-jogger-s-dry" title="@item.Name_SP">
+                                                            @item.Name_SP
+                                                        </a>
+                                                    </h3>
+                                                    <div class="box-pro-prices">
+                                                        @{
+                                                            if (item.Sale > 0)
+                                                            {
+                                                              //  int del = ;
+                                                                <p class="pro-price highlight">
+                                                                    <span class="giaban">@((item.Price_SP *(100- item.Sale)) / 100)₫</span>
+                                                                    <span class="pro-price-del"><del class="compare-price">@item.Price_SP₫</del></span>
+                                                                </p>
+                                                            }
+                                                            else
+                                                            {
+                                                                <p class="pro-price ">
+                                                                    <span class="giaban">@item.Price_SP₫</span>
+                                                                    <span class="pro-price-del"></span>
+                                                                </p>
+                                                            }
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="button-showmore">
+    <a asp-controller="San_Pham" asp-action="san_pham_sale" class="moreproduct button">Xem thêm</a>
+</div>
+
+
+
+

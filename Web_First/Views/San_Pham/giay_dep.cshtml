@@ -1,0 +1,298 @@
+﻿
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@using X.PagedList.Mvc.Bootstrap4;
+
+<!-- import the included stylesheet for some (very basic) default styling -->
+
+<head>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
+</head>
+
+
+@{
+    ViewData["Title"] = "Giầy- Dép";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+        <li class="breadcrumb-item"><a href="#">Danh mục</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Giầy-Dép</li>
+    </ol>
+</nav>
+<div class="row">
+    <div class="banner-sp">
+        <img src="~/Img/banner_sp_t10.jpg" />
+    </div>
+</div>
+<h1>Giầy Dép</h1>
+<div class="dropdown show">
+    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Mới nhất
+    </a>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" asp-action="giay_dep" asp-route-id="Price_ascending">Giá: Tăng dần</a>
+        <a class="dropdown-item" asp-action="giay_dep" asp-route-id="Price_descending">Giá: Giảm dần</a>
+        <a class="dropdown-item" asp-action="giay_dep" asp-route-id="Name_A-Z">Tên: A-Z</a>
+        <a class="dropdown-item" asp-action="giay_dep" asp-route-id="Name_Z-A">Tên: Z-A</a>
+        <a class="dropdown-item" asp-action="giay_dep" asp-route-id="mn">Mới Nhất</a>
+        <a class="dropdown-item" href="#">Bán Chạy Nhất</a>
+    </div>
+</div>
+
+
+
+
+<div class="collection-page">
+    <div class="wrapper-collection-1">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="row fitter">
+                        <div class="clearfix content-product-list ">
+                            @{
+                                var id = new List<string>();
+                            }
+                            @foreach (var item in ViewBag.OnePageOfProducts)
+                            {
+                                int ss_id(string a)
+                                {
+                                    int k = 0;
+                                    foreach (var it in id)
+                                    {
+                                        if (it == a)
+                                            k = 1;
+                                    }
+
+                                    return k;
+                                }
+                                if (ss_id(item.Id_SP) == 0)
+                                {
+                                    int h = 0;
+                                    id.Add(item.Id_SP);
+                                    <div class="col-md-3 col-sm-6 col-xs-6 pro-loop index-loop-mb animation-tran active">
+                                        <div class="product-block product-resize site-animation fixheight" data-anmation="1" style="height: 308px;">
+                                            <div class="product-img">
+                                                <a href="/products/quan-jogger-s-dry" title="@item.Name_SP" class="image-resize" style="height: 234px;">
+                                                    @foreach (var item1 in ViewBag.OnePageOfProducts)
+                                                    {
+
+                                                        if (item.Image_SP.Length < 12)
+                                                        {
+                                                            <picture>
+                                                                <source media="(max-width: 767px)" src="~/Img/sold_out11.png">
+                                                                <source media="(min-width: 768px)" src="~/Img/sold_out11.png">
+                                                                <img class="img-loop" alt=" QUẦN JOGGER S.DRY " src="~/Img/sold_out11.png">
+                                                            </picture>
+                                                            break;
+                                                        }
+                                                        else
+                                                        {
+
+                                                            if (@item.Id_SP == @item1.Id_SP)
+                                                            {
+                                                                h++;
+                                                                <picture>
+                                                                    <source media="(max-width: 767px)" srcset="/@item1.Image_SP">
+                                                                    <source media="(min-width: 768px)" srcset="/@item1.Image_SP">
+                                                                    <img class="img-loop" alt=" QUẦN JOGGER S.DRY " srcset="@item1.Image_SP">
+                                                                </picture>
+                                                            }
+                                                            if (h == 2)
+                                                            {
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+                                                </a>
+                                            </div>
+                                            <div class="product-detail clearfix">
+                                                <div class="box-pro-detail">
+                                                    <h3 class="pro-name">
+                                                        <a href="/products/quan-jogger-s-dry" title="@item.Name_SP">
+                                                            @item.Name_SP
+                                                        </a>
+                                                    </h3>
+                                                    <div class="box-pro-prices">
+                                                        @{
+                                                            if (item.Sale > 0)
+                                                            {
+                                                                //  int del = ;
+                                                                <p class="pro-price highlight">
+                                                                    <span class="giaban">@((item.Price_SP * (100 - item.Sale)) / 100)₫</span>
+                                                                    <span class="pro-price-del"><del class="compare-price">@item.Price_SP₫</del></span>
+                                                                </p>
+                                                            }
+                                                            else
+                                                            {
+                                                                <p class="pro-price ">
+                                                                    <span class="giaban">@item.Price_SP₫</span>
+                                                                    <span class="pro-price-del"></span>
+                                                                </p>
+                                                            }
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("giay_dep", new { page }), X.PagedList.Mvc.Bootstrap4.NetCore.Bootstrap4PagedListRenderOptions.Classic)
+
+@*<nav aria-label="...">
+        <ul class="pagination">
+            @{
+                int c = 1;
+                int d = 10;
+                if ((ViewBag.OnePageOfProducts.Count() % 40) == 0)
+                    d = (ViewBag.OnePageOfProducts.Count() / 40);
+                else
+                    d = ((ViewBag.OnePageOfProducts.Count() / 40) + 1);
+
+                if (d > 20)
+                {
+                    if (c == 1)
+                    {
+                        <li class="page-item disabled">
+                            <span class="page-link">&laquo;</span>
+                        </li>
+                        <li class="page-item active">
+                            <span class="page-link">
+                                1
+                                <span class="sr-only">(current)</span>
+                            </span>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">...</a></li>
+                        <li class="page-item"><a class="page-link" href="#">@d</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">&raquo;</a>
+                        </li>
+                    }
+                    else if (c == d)
+                    {
+                        <li class="page-item">
+                            <span class="page-link">&laquo;</span>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">...</a></li>
+                        <li class="page-item active">
+                            <span class="page-link">
+                                @d
+                                <span class="sr-only">(current)</span>
+                            </span>
+                        </li>
+
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#">&raquo;</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <span class="page-link">&laquo;</span>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">...</a></li>
+                        <li class="page-item active">
+                            <span class="page-link">
+                                @c
+                                <span class="sr-only">(current)</span>
+                            </span>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">...</a></li>
+                        <li class="page-item"><a class="page-link" href="#">@d</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">&raquo;</a>
+                        </li>
+                    }
+                }
+                else
+                {
+                    if (c == 1)
+                    {
+                        <li class="page-item disabled">
+                            <span class="page-link">&laquo;</span>
+                        </li>
+                        <li class="page-item active">
+                            <span class="page-link">
+                                1
+                                <span class="sr-only">(current)</span>
+                            </span>
+                        </li>
+                        for (int i = 2; i <= d; i++)
+                        {
+                            <li class="page-item"><a class="page-link" asp-action="ao_sm" asp-route-id="@i">@i</a></li>
+                        }
+                        <li class="page-item">
+                            <a class="page-link" href="#">&raquo;</a>
+                        </li>
+                    }
+                    else if (c == d)
+                    {
+                        <li class="page-item">
+                            <span class="page-link">&laquo;</span>
+                        </li>
+                        for (int i = 1; i <= d - 1; i++)
+                        {
+                            <li class="page-item"><a class="page-link" href="#">@i</a></li>
+                        }
+                        <li class="page-item active">
+                            <span class="page-link">
+                                @d
+                                <span class="sr-only">(current)</span>
+                            </span>
+                        </li>
+
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#">&raquo;</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <span class="page-link">&laquo;</span>
+                        </li>
+                        //
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        for (int i = 2; i <= d; i++)
+                        {
+                            if (c == i)
+                            {
+                                <li class="page-item active">
+                                    <span class="page-link">
+                                        @c
+                                        <span class="sr-only">(current)</span>
+                                    </span>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="page-item"><a class="page-link" href="#">@i</a></li>
+                            }
+                        }
+                        //
+                        // <li class="page-item"><a class="page-link" href="#">9</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">&raquo;</a>
+                        </li>
+                    }
+                }
+            }
+        </ul>
+    </nav>*@
+
+
+
